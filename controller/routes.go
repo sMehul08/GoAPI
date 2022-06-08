@@ -6,6 +6,7 @@ import (
 
 func Register() *http.ServeMux {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/index", data())
+	// mux.HandleFunc("/index", data())
+	mux.HandleFunc("/create", todo())
 	return mux
 }

@@ -9,7 +9,8 @@ import (
 var con *sql.DB
 
 func Connect() *sql.DB {
-	dsn := "root:root@/sandbox_zoodel"
+	dsn := "root:root@tcp(localhost:3316)/Golang"
+
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		log.Fatal(err)
