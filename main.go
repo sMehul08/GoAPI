@@ -1,8 +1,7 @@
 package main
 
 import (
-	"GoAPI/structs"
-	"encoding/json"
+	"GoAPI/controller"
 	"fmt"
 	"net/http"
 )
@@ -10,19 +9,6 @@ import (
 func main() {
 	fmt.Println("Welcome to Go")
 
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method == http.MethodGet {
-			fmt.Println("Request Method is GET")
-
-			data := structs.Response{
-				Code: http.StatusOK,
-				Body: "Data",
-			}
-
-			json.NewEncoder(w).Encode(data)
-		}
-	})
-
-	http.ListenAndServe("localhost:3000", mux)
+	mux := controller.Register()
+	http.ListenAndServe(":3000", mux)
 }
