@@ -1,7 +1,10 @@
 package model
 
-func CreateToDo() error {
-	insertQ, err := con.Query("INSERT INTO ToDo VALUES(?, ?)", "Test", "123")
+import "fmt"
+
+func CreateToDo(name, todo string) error {
+	fmt.Println(name, todo)
+	insertQ, err := con.Query("INSERT INTO ToDo VALUES(?, ?)", name, todo)
 	defer insertQ.Close()
 
 	if err != nil {
