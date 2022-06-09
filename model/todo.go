@@ -50,3 +50,13 @@ func ReadByName(name string) ([]view.PostRequest, error) {
 
 	return todos, err
 }
+
+func DeleteToDo(name string) error {
+	delQ, err := con.Query("DELETE FROM ToDo WHERE name = ?", name)
+	defer delQ.Close()
+
+	if err != nil {
+		return err
+	}
+	return nil
+}

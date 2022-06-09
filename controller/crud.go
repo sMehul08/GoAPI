@@ -27,6 +27,18 @@ func todo() http.HandlerFunc {
 			}
 			w.WriteHeader(http.StatusOK)
 			json.NewEncoder(w).Encode(&data)
+		} else if r.Method == http.MethodDelete {
+
+			name := r.URL.Query().Get("name")
+			if err := model.DeleteToDo(name); err != nil {
+				w.Write([]byte("Something wrong"))
+				return
+			}
+
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(struct {
+				Status string `json:"status"`
+			}{"Item Deleted"})
 		}
 	}
 }
