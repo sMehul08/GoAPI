@@ -4,6 +4,7 @@ import (
 	"GoAPI/model"
 	"GoAPI/view"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -29,7 +30,9 @@ func todo() http.HandlerFunc {
 			json.NewEncoder(w).Encode(&data)
 		} else if r.Method == http.MethodDelete {
 
-			name := r.URL.Query().Get("name")
+			// name := r.URL.Query().Get("name")
+			name := r.URL.Path[1:]
+			fmt.Println(name)
 			if err := model.DeleteToDo(name); err != nil {
 				w.Write([]byte("Something wrong"))
 				return
