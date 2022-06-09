@@ -19,7 +19,9 @@ func todo() http.HandlerFunc {
 			w.WriteHeader(http.StatusCreated)
 			json.NewEncoder(w).Encode(data)
 		} else if r.Method == http.MethodGet {
-			data, err := model.ReadAll()
+			// data, err := model.ReadAll()
+			name := r.URL.Query().Get("name")
+			data, err := model.ReadByName(name)
 			if err != nil {
 				w.Write([]byte(err.Error()))
 			}
